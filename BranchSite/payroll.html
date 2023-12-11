@@ -1,0 +1,208 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes onstart{
+            0%{transform: translateX(0%);}
+            100%{transform: translateX(-150%);}}
+
+        @keyframes linkstart{
+            0%{transform: translateY(-400%);}
+            100%{transform: translateY(0%);opacity:100%;}}
+        @keyframes backgroundanimation{
+            0%{background-color:#DDF2FD;}
+            25%{background-color:#d1efff ;}
+            50%{background-color:#bce8ff ;}
+            75%{background-color:#a2dfff ;}
+            100%{background-color:#DDF2FD;}
+        }
+        
+        body{
+            margin:0;
+            background-color: #EBF3E8;
+            display:grid;
+            grid-template-columns: 8% auto auto auto 8%;
+            grid-template-rows:  10% 20% 20% 20% 20% 20%;
+            animation: backgroundanimation;
+            animation-duration:10s;
+            animation-iteration-count: infinite;
+        }
+        #MainBox{
+            grid-row-start: 2;
+            grid-row-end:7;
+            grid-column-start: 3;
+            grid-column-end:3;
+            background-color: beige;
+            border:10px solid black;
+            border-radius: 15%;
+            text-align: center;
+            opacity:0%;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-duration: 2s;
+            padding-top:20px
+        }
+        #sidebar{
+            grid-row-start: 1;
+            grid-row-end: 7;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            background-color:#164863;
+            animation: onstart;
+            animation-fill-mode: forwards;
+            animation-duration:2s;
+            position: relative;
+            box-shadow:15px 15px 50px white;
+            
+        }
+
+        #return{
+            width:50px;
+            height:50px;
+            position: absolute;
+            bottom:50px;
+            opacity:80%;
+            transition:0.6s;
+            margin-left:-5%;
+        }
+        #return:hover{
+            opacity: 100%;
+            width:55px;
+            height:55px;
+        }
+        #title{
+            opacity:0%;
+            grid-row-start: 1;
+            grid-row-end:1;
+            grid-column-start: 3;
+            grid-column-end:4;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-delay:0.75s;
+            animation-duration: 2s;
+            text-align: center;
+            font-size:30px;
+        }
+        #EmployeeTable{
+            margin-left: auto;
+            margin-right: auto;
+            border:1px solid black;
+        }
+        td{border:1px solid black;
+        text-align: right;}
+        input{
+            text-align: right;
+        }
+    </style>
+    <title>
+        Payroll Table
+    </title>
+    <body>
+        <div id="sidebar"></div>
+        <div id="title"><h1></h1></div>
+        <div id="MainBox">
+            
+
+             <label for="EmpName"> Employee Name</label><br>
+             <input id="EmpName" type='text'><br>
+             <label for="Dworked">Days Worked</label><br>
+             <input id="Dworked" type="number"><br>
+             <label for="EmpRate">Rate</label><br>
+             <input id="EmpRate" type="number"><br>
+             <label for="EmpDeduc">Deductions</label><br>
+             <input id="EmpDeduc" type="number"><br>
+             <button id="enter">Enter</button><br>
+             
+             <label for="NumberDel">Delete No.</label><br>
+             <input id="NumberDel" type="number"><br>
+             <button id="DeleteSpec">Delete Index</button>
+             <button id="Delete">DelAll</button><br>
+             <br> <a  href="../index.html"><img id="return" src="BranchImg/return.png"></a>
+
+             <table id="EmployeeTable">
+                <thead>
+                   <tr>
+                      <td> No.</td>
+                      <td> Employee Name</td>
+                      <td> Days Worked</td>
+                      <td> Daily Rate</td>
+                      <td> Gross Pay</td>
+                      <td> Deduction Amount</td>
+                      <td> Net Pay</td>
+                </thead>
+                <tbody id="payrollbody">
+          
+                </tbody>
+                
+             </table>
+         </div>
+
+        <dialog id="DialogueBox">
+        <form method="dialog">
+        <h1>Delete?</h1>
+        <button id="confirm">Yes</button>
+        <button id="deny" onclick="close()">No</button>
+        </form>
+        </dialog>
+    </body>
+    <script>
+
+// global variables
+   var Counter = 0;
+   var PayrollData =[]
+   const TableBody =document.getElementById('payrollbody');
+//functions
+function closeBox(){
+            var Close =document.getElementById('DialogueBox')
+            Close.close()
+        }
+
+   function DisplayData(){
+    var i
+    TableBody.innerHTML=''
+    for(i = 0;i<Counter; i++)
+        TableBody.innerHTML += "<tr><td>"+(i+1)+"</td><td>"+PayrollData[i].Name+"</td><td>"+PayrollData[i].DaysWorked+"</td><td>"+PayrollData[i].DailyRate.toFixed(2)+"</td><td>"+PayrollData[i].GrossPay.toFixed(2)+"</td><td>"+PayrollData[i].DeductionAmm.toFixed(2)+"</td><td>"+PayrollData[i].NetPay.toFixed(2)+"</td></tr>";
+   }
+   function deleteAll(){
+    var dialog = document.getElementById('DialogueBox');
+            dialog.showModal();
+            document.getElementById('confirm').onclick = function () {
+        PayrollData=[]
+        Counter=0
+        TableBody.innerHTML = ""
+            }
+    }
+   
+   //Events
+   document.getElementById("Delete").addEventListener("click",deleteAll)
+    document.getElementById("enter").addEventListener("click",
+   ()=>{
+    var People ={
+         Name:'',
+         DaysWorked:0,
+         DailyRate:0,
+         GrossPay:0,
+         DeductionAmm:0,
+         NetPay:0,
+     
+   }
+        People.Name=document.getElementById('EmpName').value;
+        People.DaysWorked=document.getElementById('Dworked').value*1;
+        People.DailyRate=document.getElementById('EmpRate').value*1;
+        People.DeductionAmm=document.getElementById('EmpDeduc').value*1;
+        People.GrossPay=People.DaysWorked*People.DailyRate;
+        People.NetPay=People.GrossPay-People.DeductionAmm
+        PayrollData.push(People)
+        Counter +=1
+        DisplayData();
+   })
+   document.getElementById("DeleteSpec").addEventListener("click",
+   ()=>{
+    var dialog = document.getElementById('DialogueBox');
+            dialog.showModal();
+            document.getElementById('confirm').onclick = function () {
+        let remove =document.getElementById('NumberDel').value-1;
+        PayrollData.splice(remove,1 );
+        DisplayData();
+   }})
+    </script>
+</html>

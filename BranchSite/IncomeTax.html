@@ -1,0 +1,144 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes onstart{
+            0%{transform: translateX(0%);}
+            100%{transform: translateX(-150%);}}
+
+        @keyframes linkstart{
+            0%{transform: translateY(-400%);}
+            100%{transform: translateY(0%);opacity:100%;}}
+        @keyframes backgroundanimation{
+            0%{background-color:#EBF3E8;}
+            25%{background-color:#cbf1cf ;}
+            50%{background-color:#c0fac6 ;}
+            75%{background-color:#d5fcd9 ;}
+            100%{background-color:#EBF3E8;}
+        }
+        
+        body{
+            margin:0;
+            background-color: #EBF3E8;
+            display:grid;
+            grid-template-columns: 8% auto auto auto 8%;
+            grid-template-rows:  10% 20% 20% 20% 20% 20%;
+            overflow:hidden;
+            animation: backgroundanimation;
+            animation-duration:10s;
+            animation-iteration-count: infinite;
+        }
+        #MainBox{
+            grid-row-start: 2;
+            grid-row-end:6;
+            grid-column-start: 3;
+            grid-column-end:3;
+            background-color: beige;
+            border:10px solid black;
+            border-radius: 15%;
+            text-align: center;
+            opacity:0%;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-duration: 2s;
+            padding-top:50px
+        }
+        #sidebar{
+            grid-row-start: 1;
+            grid-row-end: 7;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            background-color:#86A789;
+            animation: onstart;
+            animation-fill-mode: forwards;
+            animation-duration:2s;
+            position: relative;
+            box-shadow:15px 15px 50px white;
+            
+        }
+
+        #return{
+            width:50px;
+            height:50px;
+            position: absolute;
+            bottom:50px;
+            opacity:80%;
+            transition:0.6s;
+            margin-left:-5%;
+        }
+        #return:hover{
+            opacity: 100%;
+            width:55px;
+            height:55px;
+        }
+        #title{
+            opacity:0%;
+            grid-row-start: 1;
+            grid-row-end:1;
+            grid-column-start: 3;
+            grid-column-end:4;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-delay:0.75s;
+            animation-duration: 2s;
+            text-align: center;
+            font-size:30px;
+        }
+        #FacNth{
+            width: 40%;
+        }
+        input{
+            text-align: right;
+        }
+    </style>
+    <title>
+        For N Numbers Calculator
+    </title>
+    <body>
+        <div id="sidebar"></div>
+        <div id="title"><h1></h1></div>
+        <div id="MainBox">
+            <label for="score">Input your income</label><br>
+             <input id="score" type="number">
+             <button id="enter">Enter</button><br>
+             <input id="FacNth" type="text" readonly>
+       <br> <a  href="../index.html"><img id="return" src="BranchImg/return.png"></a>
+         </div>
+    </body>
+    <script>
+        const NValues =  document.getElementById('FacNth')
+        
+        document.getElementById("enter").addEventListener("click",
+   ()=>{
+    let finalTax = 0
+    let x = document.getElementById('score').value*1
+  
+    switch(true){
+         
+        case (x>=8000000):
+            finalTax = 2410000 + ((x-8000000)*0.35)
+            NValues.value = "Taxable income is ₱" +finalTax.toFixed(2)
+            break;
+        case (x>=2000000):
+            finalTax = 490000 + ((x-2000000)*0.32)
+            NValues.value = "Taxable income is ₱" +finalTax.toFixed(2)
+            break;
+        case (x>=800000):
+            finalTax = 130000 + ((x-800000)*0.3)
+            NValues.value = "Taxable income is ₱" +finalTax.toFixed(2)
+            break;
+        case (x>=400000):
+            finalTax = 30000 + ((x-400000)*0.25)
+            NValues.value = "Taxable income is ₱" +finalTax.toFixed(2)
+            break;
+        case (x>=250000):
+            finalTax = ((x-250000)*0.20)
+            NValues.value = "Taxable income is ₱" +finalTax.toFixed(2)
+            break;
+        case (x<250000):
+            NValues.value = "Taxable income is ₱"+ finalTax.toFixed(2)
+            break;
+         }
+   })
+
+    </script>
+</html>

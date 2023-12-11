@@ -1,0 +1,143 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes onstart{
+            0%{transform: translateX(0%);}
+            100%{transform: translateX(-150%);}}
+
+        @keyframes linkstart{
+            0%{transform: translateY(-400%);}
+            100%{transform: translateY(0%);opacity:100%;}}
+        @keyframes backgroundanimation{
+            0%{background-color:#F0ECE5;}
+            25%{background-color:#fff3df;}
+            50%{background-color:#e9dfcd;}
+            75%{background-color:#ffedcd;}
+            100%{background-color:#F0ECE5;}
+        }
+        
+        body{
+            margin:0;
+            display:grid;
+            grid-template-columns: 8% auto auto auto 8%;
+            grid-template-rows:  10% 20% 20% 20% 20% 20%;
+            overflow:hidden;
+            animation: backgroundanimation;
+            animation-duration:10s;
+            animation-iteration-count: infinite;
+        }
+        #MainBox{
+            grid-row-start: 2;
+            grid-row-end:6;
+            grid-column-start: 3;
+            grid-column-end:3;
+            background-color: beige;
+            border:5px solid black;
+            border-radius: 15px;
+            text-align: center;
+            opacity:0%;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-duration: 2s;
+            
+        }
+        #sidebar{
+            grid-row-start: 1;
+            grid-row-end: 7;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            background-color:#31304D;
+            animation: onstart;
+            animation-fill-mode: forwards;
+            animation-duration:2s;
+            position: relative;
+            box-shadow:15px 15px 50px white;
+        }
+
+        #return{
+            width:50px;
+            height:50px;
+            position: absolute;
+            bottom:50px;
+            opacity:80%;
+            transition:0.6s;
+            margin-left:-5%;
+        }
+        #return:hover{
+            opacity: 100%;
+            width:55px;
+            height:55px;
+        }
+        #score{
+            text-align: right;
+            border-radius:25px;
+            border-width: 0;
+        }
+        #title{
+            opacity:0%;
+            grid-row-start: 1;
+            grid-row-end:1;
+            grid-column-start: 3;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-delay:0.75s;
+            animation-duration: 2s;
+            text-align: center;
+            float:top;
+            font-size:30px;
+        }
+        input{
+            text-align: right;
+        }
+    </style>
+    <title>
+        Conversion
+    </title>
+    <body>
+        <div id="sidebar"></div>
+
+        <div id="MainBox">
+            <label for="score"></label><br>
+             <input id="score" type="number">
+
+             <select name="computationType" id="itemdesc">
+                <option value="FahrenheitToCelsius"> Fahrenheit To Celsius</option>
+                <option value="CelsiusToFarenheit"> Celsius to Fahrenheit</option>
+                <option value="MetersToFeet"> Meters To Feet</option>
+                <option value="FeetToMeters"> Feet To Meters</option>
+            </select>
+             <button id="enter">Enter</button><br>
+         <input id="Output" type="text" readonly>
+       <br> <a  href="../index.html"><img id="return" src="BranchImg/return.png"></a>
+         </div>
+
+    </body>
+    <script>
+       
+
+       var Out = document.getElementById('Output')
+        document.getElementById("enter").addEventListener("click",
+   ()=>{
+        let UserIn=document.getElementById('score').value*1;
+        const Convert =  document.getElementById('itemdesc');
+        let x = 0;
+        if (Convert.value=="FahrenheitToCelsius"){
+            x = (UserIn -32) *5/9
+            Out.value=x.toFixed(0) + "°C"; 
+        }
+        if (Convert.value=="CelsiusToFarenheit"){
+            x =UserIn * (9/5) + 32
+            Out.value=x.toFixed(0)+"°F"; 
+        }
+        if (Convert.value=="MetersToFeet"){
+            x =UserIn * 3.2808;
+            Out.value=x.toFixed(0)+" Feet"; 
+        }
+        if (Convert.value=="FeetToMeters"){
+            x =UserIn * 0.3048;
+            Out.value=x.toFixed(0)+" Meters"; 
+        }
+   })
+
+    </script>
+</html>

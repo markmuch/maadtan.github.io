@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <!--Stylization and divs-->
+    <style>
+        @keyframes webload{
+            0%{opacity:0%;}
+            100%{opacity:100%;}
+        }
+        body{
+        background-color: #F3F0CA;
+        margin:0px;
+        transition:0.5s;
+        font-family:'Roboto',sans-serif;
+        animation:webload;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        overflow:hidden
+
+        }
+        #Sidebar{
+            background-color:#192655;
+            width:7%;
+            height:100%;
+            position:fixed;
+            color:black;
+            padding-top:10%;
+            transition:0.6s;
+            box-shadow:15px 15px 50px white;
+
+        }
+        #Sidebar:hover{
+            width:8%;
+
+        }
+        .Buttons{
+         background-color:transparent;
+         border-color:white;
+         border:2px;
+         transition:0.6s;
+         opacity:0.8;
+         width:90%;
+         height:15%;
+        }
+        .Buttons:hover{
+            opacity:1;
+            width:110%;
+            height:30%;
+            margin-left:0px
+        }
+        #MainInfo{
+            padding-top:3%;
+            text-align: right;
+            font-size:5vw;
+            padding-right:5%;
+            font-weight:bold;
+        }
+        #MinorInfo{
+            font-size:3vw;
+
+        }
+        .linkpics{
+            width:85%;
+
+
+        }
+        h3{
+            font-size: 1.25vw;
+            font-weight:100;
+        }
+        .imageUp{
+            margin-top:10px;
+            position:absolute;
+            margin-left: 900px;
+            float:left;
+            width:20%;
+            transition:0.6s;
+            overflow:hidden;
+        }
+        #Information{
+            float:right;
+            width:30%;
+            text-align: right;
+            
+
+        }
+        #InfoDump{
+            text-align: left;
+        }
+        .textbold{
+            font-weight:bold;
+        }
+
+    </style>
+    <title>Main Index</title>
+    <!--Body portion starts here -->
+    <body>
+    <div id="maindiv">
+        <div id="Sidebar">
+            <a href="BranchSite/fornnums.html">
+                <button class="Buttons" id="calcu">
+                <image src="images/calc3.png" class="linkpics"></image>
+                </button>
+                </a>
+            <a href="BranchSite/payroll.html">
+                <button class="Buttons" id="paycheck">
+                <image src="images/paycheck.png" class="linkpics"></image>
+                </button>
+                </a>
+            <a href="BranchSite/Conversion.html">
+                <button class="Buttons" id="conversion">
+                <image src="images/TempRuler.png" class="linkpics"></image>
+                </button>
+                </a>
+            <a href="BranchSite/IncomeTax.html">
+                <button class="Buttons" id="incometax">
+                <image src="images/Moenybag.png" class="linkpics"></image>
+                </button>
+                </a>
+        </div>
+        <div id="MainInfo">
+            <div id="TitleInfo">
+            Mark Andre Alfredo D. Tan
+            </div>
+            <h1 id="MinorInfo">
+                A CS-1130 Project
+            </h1>
+            <div id="Information">
+            <h3 id="InfoDump">
+                A student from CS 1-B <br><br> Currently taking Intro to Computing under Sir John Roy Geralde<br>
+                This page is the index for the 4 website projects (conversion, income tax calculator, grocery,payroll)
+                <br><br>
+                <b>
+                Hover over the icons to see the description and click to be redirected
+                </b>    
+            </h3>
+           </div>
+        </div>
+        
+    </div>
+    <image src="" class="imageUp" id="ButtomLeftImage"></image>
+    </body>
+
+
+    <script>
+    const calculatorbutton =document.getElementById('calcu');
+    const paycheckbutton =document.getElementById('paycheck');
+    const conversionbutton =document.getElementById('conversion');
+    const incometaxbutton =document.getElementById('incometax');
+
+
+    const Main= document.getElementById('TitleInfo');
+    const Minor = document.getElementById('MinorInfo');
+    const Info = document.getElementById('InfoDump');
+    
+    const Background = document.getElementById('Body');
+    const Sidebar = document.getElementById('Sidebar');
+
+    var returnMain = document.getElementById('TitleInfo').innerHTML;
+    var returnMinor = document.getElementById('MinorInfo').innerHTML;
+    var returnInfo =document.getElementById('InfoDump').innerHTML;
+    function OriginalBack(){
+        Main.innerHTML = returnMain;
+        Minor.innerHTML = returnMinor;
+        Info.innerHTML = returnInfo;
+        document.body.style.backgroundColor= "#F3F0CA";
+        Sidebar.style.backgroundColor="#192655";
+    }
+    paycheckbutton.addEventListener('mouseover', function() {
+      Main.textContent = "Simple Payroll";
+      Minor.textContent = "Payroll Table";
+      Info.innerHTML="<b>A program which makes a payroll table in which the user inputs the information.</b><br><br>The following information will be user input:<br> No.<br> Employee Name<br> Days Worked<br> Daily Rate<br> Gross Pay<br> Deduction Amount<br> Net Pay<br><br>Wherein     <br> No. is the Payroll List Line Number<br> Gross Pay is DaysWorked*DailyRate<br>Net Pay is Gross Pay - Deduction Amount";
+      document.body.style.backgroundColor = "#DDF2FD";
+      Sidebar.style.backgroundColor="#164863";
+      imagebl.src="calc3.png";
+    });
+      calculatorbutton.addEventListener('mouseover', function() {
+      Main.textContent = "Factorial, Sum and Average";
+      Minor.textContent = "For n numbers";
+      Info.innerHTML="<b>A program which takes a number and does 3 different functions with said number</b><br> <br>Finding the factorial for that number using a while loop<br>Finding the Sum of the first N natural numbers using a do while loop<br> Computing the average of the first N natural numbers using a for loop ";
+      document.body.style.backgroundColor = "#EBF3E8";
+      Sidebar.style.backgroundColor="#86A789";
+    });
+    conversionbutton.addEventListener('mouseover', function() {
+      Main.textContent = "Conversion";
+      Minor.textContent = "Temperature & Length Calculator";
+      Info.innerHTML="<b>A program which takes a number and does 3 different functions with said number</b> <br><br> Celsius to fahrenheit or Fahrenheit to Celsius <br> Meters to Feet or Feet to Meters";
+      document.body.style.backgroundColor = "#F0ECE5";
+      Sidebar.style.backgroundColor="#31304D";
+    });
+    incometaxbutton.addEventListener('mouseover', function() {
+      Main.textContent = "Calculator";
+      Minor.textContent = "Income Tax";
+      Info.innerHTML="<b>A program to calculate Income Tax</b> <br><br> Income Tax computation is based on the Philippine tax bracket";
+      document.body.style.backgroundColor = "#EADCA6";
+      Sidebar.style.backgroundColor="#C36A2D";
+    });
+    calculatorbutton.addEventListener('mouseout',OriginalBack);
+    paycheckbutton.addEventListener('mouseout',OriginalBack);
+    conversionbutton.addEventListener('mouseout',OriginalBack);
+    incometaxbutton.addEventListener('mouseout',OriginalBack);
+    </script>
+</html>

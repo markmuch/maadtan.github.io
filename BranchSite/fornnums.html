@@ -1,0 +1,130 @@
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @keyframes onstart{
+            0%{transform: translateX(0%);}
+            100%{transform: translateX(-150%);}}
+
+        @keyframes linkstart{
+            0%{transform: translateY(-400%);}
+            100%{transform: translateY(0%);opacity:100%;}}
+        @keyframes backgroundanimation{
+            0%{background-color:#EBF3E8;}
+            25%{background-color:#cbf1cf ;}
+            50%{background-color:#c0fac6 ;}
+            75%{background-color:#d5fcd9 ;}
+            100%{background-color:#EBF3E8;}
+        }
+        
+        body{
+            margin:0;
+            background-color: #EBF3E8;
+            display:grid;
+            grid-template-columns: 8% auto auto auto 8%;
+            grid-template-rows:  10% 20% 20% 20% 20% 20%;
+            overflow:hidden;
+            animation: backgroundanimation;
+            animation-duration:10s;
+            animation-iteration-count: infinite;
+        }
+        #MainBox{
+            grid-row-start: 2;
+            grid-row-end:6;
+            grid-column-start: 3;
+            grid-column-end:3;
+            background-color: beige;
+            border:10px solid black;
+            border-radius: 15%;
+            text-align: center;
+            opacity:0%;
+            animation:linkstart;
+            animation-fill-mode: forwards;
+            animation-duration: 2s;
+            padding-top:50px;
+            margin-top:30%
+        }
+        #sidebar{
+            grid-row-start: 1;
+            grid-row-end: 7;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            background-color:#86A789;
+            animation: onstart;
+            animation-fill-mode: forwards;
+            animation-duration:2s;
+            position: relative;
+            box-shadow:15px 15px 50px white;
+            
+        }
+
+        #return{
+            width:50px;
+            height:50px;
+            position: absolute;
+            bottom:50px;
+            opacity:80%;
+            transition:0.6s;
+            margin-left:-5%;
+        }
+        #return:hover{
+            opacity: 100%;
+            width:55px;
+            height:55px;
+        }
+     
+    </style>
+    <title>
+        
+    </title>
+    <body>
+        <div id="sidebar"></div>
+
+        <div id="MainBox">
+            <label for="score">What would you like N to be?</label><br>
+             <input id="score" type="number">
+             <button id="enter">Enter</button>
+         <p id="FacNth"></p>
+       <br> <a  href="../index.html"><img id="return" src="BranchImg/return.png"></a>
+         </div>
+    </body>
+    <script>
+        const NValues =  document.getElementById('FacNth')
+        function nThFactorial(){  
+           var x = document.getElementById("score").value*1; 
+           let counter=x;
+            while (counter>1){
+                counter-=1;
+                x*=counter;
+            }
+            return x;
+   }    
+        function nThSummation(){
+            var x = document.getElementById("score").value*1; 
+           let counter=x;
+            do{
+                counter -=1
+                x+=counter;
+                
+            }while(counter>1)
+            return x;
+        }
+        function nThAverage(){
+            var x = document.getElementById("score").value*1; 
+            let sum = 0
+            for(let counter = x;counter >0; counter--){
+                sum +=counter
+            }
+            return sum/x;
+        }
+        document.getElementById("enter").addEventListener("click",
+   ()=>{
+         const FactRes=nThFactorial().toFixed(0);
+         const SumRes=nThSummation().toFixed(0);
+         const AveRes=nThAverage().toFixed(0);
+         NValues.innerHTML = "Factorial is " + FactRes +"<br>"; 
+         NValues.innerHTML += "Summation is " + SumRes +"<br>";
+         NValues.innerHTML += "Average of first N numbers is " + AveRes;
+   })
+
+    </script>
+</html>
